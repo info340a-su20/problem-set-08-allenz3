@@ -6,3 +6,53 @@ const EXAMPLE_SENATORS = [
 ];
 
 /* Your code goes here */
+export class App extends Component {
+  render() {
+    return (
+      <div className="container">
+        <h1>US Senators 2019</h1>
+        <SenatorTable />
+      </div>
+    );
+  }
+}
+
+export class SenatorTable extends Component {
+  render() {
+    return <table className="table table-bordered">
+      <TableHeader />
+    </table>;
+  }
+}
+
+export class TableHeader extends Component {
+  render() {
+    console.log("here");
+    console.log(this);
+    const colNames = this.props.cols.map((colName) => {
+      return <ColumnHeading
+              key = { colName }
+              />;
+    })
+
+    return (
+      <thead>
+        <tr>asdf {colNames}</tr>
+      </thead>
+    );
+  }
+}
+
+class ColumnHeading extends Component {
+  render() {
+    const key = "Column Heading";
+    return (
+      <th>{ key }</th>
+    );
+  }
+}
+
+export class SenatorRow extends Component {
+
+}
+/**/
