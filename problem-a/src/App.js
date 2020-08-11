@@ -30,24 +30,15 @@ export class SenatorTable extends Component {
 export class TableHeader extends Component {
   render() {
     const colNames = this.props.cols.map((colName) => {
-      return <ColumnHeading
-              key = { colName }
-              />;
+      return <th key={ colName }>
+              { colName }
+              </th>;
     })
 
     return (
       <thead>
         <tr>{ colNames }</tr>
       </thead>
-    );
-  }
-}
-
-class ColumnHeading extends Component {
-  render() {
-    const key = "Column Heading";
-    return (
-      <th>{ key }</th>
     );
   }
 }
