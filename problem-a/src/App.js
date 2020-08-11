@@ -4,14 +4,16 @@ const EXAMPLE_SENATORS = [
   { id: 'C000127',  name: 'Maria Cantwell', state: 'WA',  party: 'Democrat', phone: '202-224-3441', twitter: 'SenatorCantwell' },
   { id: 'M001111', name: 'Patty Murray', state: 'WA', party: 'Democrat', phone: '202-224-2621', twitter: 'PattyMurray' }
 ];
-
+//<SenatorRow senator = {EXAMPLE_SENATORS[i]}/>
 /* Your code goes here */
 export class App extends Component {
   render() {
+    console.log("here");
+    console.log(this.props.senators);
     return (
       <div className="container">
         <h1>US Senators 2019</h1>
-        <SenatorTable />
+        <SenatorTable { senators }/>
       </div>
     );
   }
@@ -23,7 +25,7 @@ export class SenatorTable extends Component {
       <table className="table table-bordered">
         <TableHeader cols = {['Name', 'State', 'Phone', 'Twitter']} />
         <tbody>
-          <SenatorRow senator = {EXAMPLE_SENATORS}/>
+          <SenatorRow senator = {this.props.senators}/>
         </tbody>
       </table>
     );
@@ -48,22 +50,26 @@ export class TableHeader extends Component {
 
 export class SenatorRow extends Component {
   render() {
-    const row = this.props.senator.map((senator) => {
+    const renderSenator = (senator, index) => {
       return (
-        <tr key={senator.id}>
-          <td>{ senator.name }</td>
-          <td>{ senator.party.substring(0, 1) + " - " + senator.state }</td>
-          <td>
-            <a href={ "tel:+" + senator.phone }>{ senator.phone }</a>
-          </td>
-          <td href="https://twitter.com/user_name">
-            <a>{ "@" + senator.twitter }</a>
-          </td>
-        </tr>
-      );
-    });
+          <tr key={ senator.id }>
+            <td>{ senator.name }</td>
+            <td>{ senator.party.substring(0, 1) + " - " + senator.state }</td>
+            <td>
+              <a href={ "tel:+" + senator.phone }>{ senator.phone }</a>
+            </td>
+            <td>
+              <a href={ ("https://twitter.com/" + senator.name).replace(/\s/g, '') }>{ "@" + senator.twitter }</a>
+            </td>
+          </tr>
+        );
+    };
+
+
+    //const row = this.props.senator.map((senator) => { 
+    //});
     return (
-        {row}
+        this.props.senator.map(renderSenator)
     );
   }
 }
