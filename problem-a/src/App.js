@@ -8,12 +8,10 @@ const EXAMPLE_SENATORS = [
 /* Your code goes here */
 export class App extends Component {
   render() {
-    console.log("here");
-    console.log(this.props.senators);
     return (
       <div className="container">
         <h1>US Senators 2019</h1>
-        <SenatorTable { senators }/>
+        <SenatorTable senators = { this.props.senators }/>
       </div>
     );
   }
