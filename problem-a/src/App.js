@@ -21,7 +21,10 @@ export class SenatorTable extends Component {
   render() {
     return (
       <table className="table table-bordered">
-        <TableHeader cols={['Name', 'State', 'Phone', 'Twitter']} />
+        <TableHeader cols = {['Name', 'State', 'Phone', 'Twitter']} />
+        <tbody>
+          <SenatorRow senator = {EXAMPLE_SENATORS}/>
+        </tbody>
       </table>
     );
   }
@@ -30,10 +33,10 @@ export class SenatorTable extends Component {
 export class TableHeader extends Component {
   render() {
     const colNames = this.props.cols.map((colName) => {
-      return <th key={ colName }>
+      return (<th key={ colName }>
               { colName }
-              </th>;
-    })
+              </th>);
+    });
 
     return (
       <thead>
@@ -44,6 +47,24 @@ export class TableHeader extends Component {
 }
 
 export class SenatorRow extends Component {
-
+  render() {
+    const row = this.props.senator.map((senator) => {
+      return (
+        <tr key={senator.id}>
+          <td>{ senator.name }</td>
+          <td>{ senator.party.substring(0, 1) + " - " + senator.state }</td>
+          <td>
+            <a href={ "tel:+" + senator.phone }>{ senator.phone }</a>
+          </td>
+          <td href="https://twitter.com/user_name">
+            <a>{ "@" + senator.twitter }</a>
+          </td>
+        </tr>
+      );
+    });
+    return (
+        {row}
+    );
+  }
 }
 /**/

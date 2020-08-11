@@ -56,7 +56,7 @@ To complete the exercise, edit the included **`src/App.js`** and **`src/index.js
     - One cell whose content is the Senator's `name`.
     - One cell whose content is the Senator's `state` and the first letter of the Senator's `party`. For example: `"D - WA"`.
     - One cell whose content is Senator's phone number. This cell should include an `<a>` element whose `href` refers to the phone number with the `tel:` protocol (so that you could click on the link to dial on a mobile device). _Use an inline expression to construct the `href` string!)_
-    - One cell whose content is the Senator's `twitter` account. This cel should also include an `<a>` element whose `href` refers to a URL of the format `https://twitter.com/user_name` (replacing `user_name` with the Twitter handle). The displayed text of the link should include an `@` in front of the twitter handle.
+    - One cell whose content is the Senator's `twitter` account. This cell should also include an `<a>` element whose `href` refers to a URL of the format `https://twitter.com/user_name` (replacing `user_name` with the Twitter handle). The displayed text of the link should include an `@` in front of the twitter handle.
 
 6. Modify the `SenatorTable` class so that its `render()` function maps the provided `EXAMPLE_SENATORS` array to an array of `<SenatorRow>` objects, and then includes this array in the returned `<table>` (below the `<TableHeader>`). This should cause your table to now show two Senators and their information.
 
