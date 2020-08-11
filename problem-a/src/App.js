@@ -19,16 +19,16 @@ export class App extends Component {
 
 export class SenatorTable extends Component {
   render() {
-    return <table className="table table-bordered">
-      <TableHeader />
-    </table>;
+    return (
+      <table className="table table-bordered">
+        <TableHeader cols={['Name', 'State', 'Phone', 'Twitter']} />
+      </table>
+    );
   }
 }
 
 export class TableHeader extends Component {
   render() {
-    console.log("here");
-    console.log(this);
     const colNames = this.props.cols.map((colName) => {
       return <ColumnHeading
               key = { colName }
@@ -37,7 +37,7 @@ export class TableHeader extends Component {
 
     return (
       <thead>
-        <tr>asdf {colNames}</tr>
+        <tr>{ colNames }</tr>
       </thead>
     );
   }
