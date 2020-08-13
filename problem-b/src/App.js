@@ -16,10 +16,10 @@ class App extends Component {
           <div className="row">
             <div id="navs" className="col-3">
             </div>
-            <BreedNav breeds = { _.groupBy(this.props.pets, Object.keys()) }/>
+            <BreedNav breeds={Object.keys(_.groupBy(this.props.pets, "breed"))} />
             <AboutNav />
             <div id="petList" className="col-9">
-
+              <PetList pets={this.props.pets} />
             </div>
           </div>
         </main>
@@ -53,18 +53,46 @@ class AboutNav extends Component {
 
 class BreedNav extends Component {
   render() {
-    console.log(this.props.breeds)
     const breedListItems = this.props.breeds.map((breed) => {
-      return <li key={ breed }><a href="#/">{ breed }</a></li>
+      return <li key={breed}><a href="#/">{breed}</a></li>
     });
 
     return (
       <nav id="breedLinks">
         <h2>Pick a Breed</h2>
         <ul className="list-unstyled">
-          { breedListItems }
+          {breedListItems}
         </ul>
       </nav>
+    );
+  }
+}
+
+class PetCard extends Component {
+  render() {
+    const pet = this.props.pet;
+    return (
+      <div className="card">
+        <img className="card-img-top" src={pet.img} alt={pet.name} />
+        <div className="card-body">
+          <h3 className="card-title">{pet.name}</h3>
+          <p className="card-text">{pet.sex + " " + pet.breed}</p>
+        </div>
+      </div>
+    );
+  }
+}
+
+class PetList extends Component {
+  render() {
+    const petList = this.props.pets.map((pet) =>
+      <PetCard key={pet.name} pet={pet} />
+    )
+    return (
+      <div>
+        <h2>Dogs for Adoption</h2>
+        <i>{petList}</i>
+      </div>
     );
   }
 }
