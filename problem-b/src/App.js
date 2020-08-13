@@ -3,6 +3,21 @@ import "./style.css";
 import _ from "lodash";
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      pets: this.props.pets
+    }
+  }
+
+  // adopt = (petName) => {
+  //   const stateChanges = {
+  //     pets.adopt: true;
+  //   };
+  //   this.setState(stateChanges);
+  // }
+
   render() {
     return (
       <div>
@@ -16,10 +31,10 @@ class App extends Component {
           <div className="row">
             <div id="navs" className="col-3">
             </div>
-            <BreedNav breeds={Object.keys(_.groupBy(this.props.pets, "breed"))} />
+            <BreedNav breeds={Object.keys(_.groupBy(this.state.pets, "breed"))} />
             <AboutNav />
             <div id="petList" className="col-9">
-              <PetList pets={this.props.pets} />
+              <PetList pets={this.state.pets} />
             </div>
           </div>
         </main>
