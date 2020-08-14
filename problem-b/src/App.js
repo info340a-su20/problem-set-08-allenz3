@@ -11,12 +11,12 @@ class App extends Component {
     }
   }
 
-  // adopt = (petName) => {
-  //   const stateChanges = {
-  //     pets.adopt: true;
-  //   };
-  //   this.setState(stateChanges);
-  // }
+  adopt = (petName) => {
+    const stateChanges = {
+      pets: _.find(this.state.pets, ["name", petName]).adopted = true
+    };
+    this.setState(stateChanges);
+  }
 
   render() {
     return (
@@ -34,7 +34,7 @@ class App extends Component {
             <BreedNav breeds={Object.keys(_.groupBy(this.state.pets, "breed"))} />
             <AboutNav />
             <div id="petList" className="col-9">
-              <PetList pets={this.state.pets} />
+              <PetList pets={this.state.pets} adoptCallback={this.adopt}/>
             </div>
           </div>
         </main>
@@ -86,11 +86,12 @@ class BreedNav extends Component {
 class PetCard extends Component {
   render() {
     const pet = this.props.pet;
+    const adopt = this.props.adoptCallback;
     return (
-      <div className="card">
+      <div className="card" onClick={(event) => {adopt(pet.name)}}>
         <img className="card-img-top" src={pet.img} alt={pet.name} />
         <div className="card-body">
-          <h3 className="card-title">{pet.name}</h3>
+          <h3 className="card-title">{pet.name}<span>{pet.adopted ? "(Adopted)" : ''}</span></h3>
           <p className="card-text">{pet.sex + " " + pet.breed}</p>
         </div>
       </div>
@@ -100,8 +101,9 @@ class PetCard extends Component {
 
 class PetList extends Component {
   render() {
+    const adopt = this.props.adoptCallback;
     const petList = this.props.pets.map((pet) =>
-      <PetCard key={pet.name} pet={pet} />
+      <PetCard key={pet.name} pet={pet} adoptCallback={adopt} />
     )
     return (
       <div>
