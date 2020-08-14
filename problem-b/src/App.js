@@ -12,8 +12,9 @@ class App extends Component {
   }
 
   adopt = (petName) => {
-    const stateChanges = {
-      pets: _.find(this.state.pets, ["name", petName]).adopted = true
+    console.log("being clicked");
+    const stateChanges = (state) => {
+      _.find(this.state.pets, ["name", petName]).adopted = true
     };
     this.setState(stateChanges);
   }
@@ -87,11 +88,15 @@ class PetCard extends Component {
   render() {
     const pet = this.props.pet;
     const adopt = this.props.adoptCallback;
+    let displayedName = pet.name;
+    if(pet.adopted) {
+      displayedName = pet.name + " (Adopted)";
+    }
     return (
       <div className="card" onClick={(event) => {adopt(pet.name)}}>
         <img className="card-img-top" src={pet.img} alt={pet.name} />
         <div className="card-body">
-          <h3 className="card-title">{pet.name}<span>{pet.adopted ? "(Adopted)" : ''}</span></h3>
+          <h3 className="card-title">{displayedName}</h3>
           <p className="card-text">{pet.sex + " " + pet.breed}</p>
         </div>
       </div>
@@ -102,7 +107,7 @@ class PetCard extends Component {
 class PetList extends Component {
   render() {
     const adopt = this.props.adoptCallback;
-    const petList = this.props.pets.map((pet) =>
+    const petList = this.props.pets.map((pet) => 
       <PetCard key={pet.name} pet={pet} adoptCallback={adopt} />
     )
     return (
